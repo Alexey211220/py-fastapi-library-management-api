@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from db import models
+from . import models
 import schemas
 
 def get_authors(db: Session, skip: int, limit: int):

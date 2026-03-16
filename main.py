@@ -5,8 +5,8 @@ from sqlalchemy.orm import Session
 
 import crud
 import schemas
-from db import models
-from db.engine import SessionLocal, engine
+import models
+from engine import SessionLocal, engine
 
 
 app = FastAPI()
@@ -53,7 +53,7 @@ def create_author(
     author_name = db.query(models.DBAuthor).filter(models.DBAuthor.name == author.name).first()
 
     if author_name:
-        raise HTTPException(status_code=404, detail="Author with this name already exists")
+        raise HTTPException(status_code=409, detail="Author with this name already exists")
     return crud.create_author(db=db, author=author)
 
 
